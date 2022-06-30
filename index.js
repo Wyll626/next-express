@@ -1,4 +1,6 @@
 const express = require("express");
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 const app = express();
 
@@ -8,7 +10,8 @@ app.get("/", (req, res) => {
 	res.json({ message: "Hello World"  });
 })
 
-app.get("/health-check", (req, res) => {
+app.get("/health-check", async(req, res) => {
+	await exec("yarn redeploy:dev");
 	res.json({ message: "Server up and running"  });
 })
 

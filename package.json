@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cleanup": "node scripts/cleanup.ts",
-    "generate": "node scripts/generateFiles.ts",
-    "deploy:dev": "node scripts/deploy.ts",
+    "run": "node",
+    "cleanup": "node scripts/cleanup.js",
+    "generate": "node scripts/generateFiles.js",
+    "deploy:dev": "node scripts/deploy.js",
     "redeploy:dev": "yarn cleanup && yarn generate && yarn deploy:dev",
     "redeploy": "yarn cleanup && yarn generate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "child_process": "^1.0.2",
+    "fs-extra": "^10.1.0"
   }
 }
