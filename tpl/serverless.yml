@@ -1,2 +1,5 @@
 oliveServiceApp:
   component: "@sls-next/serverless-component@3.7.0"
+    inputs:
+    cloudfront:
+      distributionId: E225990456Y1ZM
