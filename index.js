@@ -1,6 +1,15 @@
 const express = require("express");
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+async function redeploy() {
+  try {
+    const { stdout, stderr } = await exec('yarn redeploy:dev');
+    console.log('stdout:', stdout);
+    console.log('stderr:', stderr);
+  } catch (e) {
+    console.error(e); // should contain code (exit code) and signal (that caused the termination).
+  }
+}
 
 const app = express();
 
@@ -10,9 +19,9 @@ app.get("/", (req, res) => {
 	res.json({ message: "Hello World"  });
 })
 
-app.get("/health-check", async(req, res) => {
-	await exec("yarn redeploy:dev");
-	res.json({ message: "Server up and running"  });
+app.get("/deploy", async(req, res) => {
+	await redeploy();
+	res.json({ message: "Deployment is done"  });
 })
 
 app.listen(PORT, () => {
